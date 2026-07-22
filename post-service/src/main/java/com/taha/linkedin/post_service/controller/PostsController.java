@@ -6,6 +6,7 @@ import com.taha.linkedin.post_service.dto.PostDto;
 import com.taha.linkedin.post_service.service.PostsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
+@Slf4j
 public class PostsController {
 
     private final PostsService postsService;
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto, HttpServletRequest httpServletRequest) {
-        PostDto createdPost = postsService.createPost(postDto, 1L);
+        String userId = httpServletRequest.getHeader("X-User-Id");
+        log.info("User with id : {} creating post ", userId);
+        PostDto createdPost = postsService.createPost(postDto, Long.valueOf(userId));
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
