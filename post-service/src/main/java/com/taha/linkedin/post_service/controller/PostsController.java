@@ -1,6 +1,7 @@
 package com.taha.linkedin.post_service.controller;
 
 
+import com.taha.linkedin.post_service.auth.UserContextHolder;
 import com.taha.linkedin.post_service.dto.PostCreateRequestDto;
 import com.taha.linkedin.post_service.dto.PostDto;
 import com.taha.linkedin.post_service.service.PostsService;
@@ -31,6 +32,7 @@ public class PostsController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long postId) {
+        Long userId = UserContextHolder.getCurrentUserId();
         PostDto postDto = postsService.getPostById(postId);
         return ResponseEntity.ok(postDto);
     }

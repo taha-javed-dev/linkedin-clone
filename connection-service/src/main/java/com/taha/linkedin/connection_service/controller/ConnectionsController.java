@@ -2,6 +2,7 @@ package com.taha.linkedin.connection_service.controller;
 
 import com.taha.linkedin.connection_service.entity.Person;
 import com.taha.linkedin.connection_service.service.ConnectionsService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,8 @@ public class ConnectionsController {
 
     private final ConnectionsService connectionsService;
 
-    @GetMapping("/{userId}/first-degree")
-    public ResponseEntity<List<Person>> getFirstConnections(@PathVariable Long userId) {
-        return ResponseEntity.ok(connectionsService.getFirstDegreeConnections(userId));
+    @GetMapping("/first-degree")
+    public ResponseEntity<List<Person>> getFirstConnections() {
+        return ResponseEntity.ok(connectionsService.getFirstDegreeConnections());
     }
 }
