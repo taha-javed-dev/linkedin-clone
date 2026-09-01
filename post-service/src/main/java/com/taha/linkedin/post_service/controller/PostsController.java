@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/core")
 @RequiredArgsConstructor
 @Slf4j
 public class PostsController {
@@ -23,16 +23,13 @@ public class PostsController {
     private final PostsService postsService;
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto, HttpServletRequest httpServletRequest) {
-        String userId = httpServletRequest.getHeader("X-User-Id");
-        log.info("User with id : {} creating post ", userId);
-        PostDto createdPost = postsService.createPost(postDto, Long.valueOf(userId));
+    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto) {
+        PostDto createdPost = postsService.createPost(postDto);
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long postId) {
-        Long userId = UserContextHolder.getCurrentUserId();
         PostDto postDto = postsService.getPostById(postId);
         return ResponseEntity.ok(postDto);
     }

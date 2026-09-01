@@ -15,7 +15,7 @@ spring:
                 - StripPrefix=3
 
             - id: post-service
-              uri: lb://POSTS-SERVICE
+              uri: lb://POST-SERVICE
               predicates:
                 - Path=/api/v1/posts/**
               filters:
