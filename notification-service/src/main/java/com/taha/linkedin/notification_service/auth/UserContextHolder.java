@@ -1,4 +1,4 @@
-package com.taha.linkedin.connection_service.auth;
+package com.taha.linkedin.notification_service.auth;
 
 public class UserContextHolder {
 

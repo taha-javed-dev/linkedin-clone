@@ -1,4 +1,4 @@
-package com.taha.linkedin.connection_service.auth;
+package com.taha.linkedin.notification_service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
